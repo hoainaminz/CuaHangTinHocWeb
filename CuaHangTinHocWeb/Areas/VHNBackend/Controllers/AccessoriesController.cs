@@ -56,21 +56,24 @@ namespace CuaHangTinHocWeb.Areas.VHNBackend.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDLinhkien,Tenlinhkien,Loai,Gianhap,Giaban,Soluong,Hinhanh")]tblAccessory tblAccessory ) 
+        //[Bind(Include = "IDLinhkien,Tenlinhkien,Loai,Gianhap,Giaban,Soluong,Hinhanh")]
+        public ActionResult Create(tblAccessory tblAccessory, HttpPostedFileBase file) 
             //HttpPostedFileBase UploadImage
 
         {
             tblAccessory tbl = new tblAccessory();
             if (ModelState.IsValid)
             {
-                //string ImageFileName = Path.GetFileName(UploadImage.FileName); // Lấy tên file gán vào ImageFileName
-                //string FolderPath = Path.Combine(Server.MapPath("~/Images"), ImageFileName); //thêm Folderpath bằng ~/Images + ImageFileName
-                //UploadImage.SaveAs(FolderPath); //gán giá trị vào UploadImage
-                //tbl.Hinhanh = UploadImage.FileName; //Gán giá trị vào bảng
-                db.tblAccessories.Add(tblAccessory); //Áp dụng vào database 
+                string path = Path.Combine(Server.MapPath("~/Images"), Path.GetFileName(file.FileName));
+                file.SaveAs(path);
+                db.tblAccessories.Add(new tblAccessory
+                {
+                    Tenlinhkien = tblAccessory.Tenlinhkien, Loai = tblAccessory.Loai, Gianhap = tblAccessory.Gianhap,
+                    Giaban = tblAccessory.Giaban, Soluong = tblAccessory.Soluong,
+                    Hinhanh = "~/Images/" + file.FileName
+                }); //Áp dụng vào database 
                 db.SaveChanges(); //Lưu
                 TempData["AlertMessage"]="Thêm thành công !"; // Gán tempdata để hiện thông báo
-               // ViewBag.imagename = UploadImage.FileName;//gán tên file được thêm vào ViewBag
                 return RedirectToAction("Index");
             }
 

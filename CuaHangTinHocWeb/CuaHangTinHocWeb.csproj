@@ -134,10 +134,12 @@
     <Compile Include="Areas\VHNBackend\Models\AccountModel.cs" />
     <Compile Include="Areas\VHNBackend\Utility\SessionHelper.cs" />
     <Compile Include="Areas\VHNBackend\VHNBackendAreaRegistration.cs" />
+    <Compile Include="Controllers\AccessoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccessoriesModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2061,7 +2063,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\barosia.png" />
+    <Content Include="Images\defaultAccessories.png" />
     <Content Include="Images\gtx3060ti12.jpeg" />
+    <Content Include="Images\img1.jpg" />
+    <Content Include="Images\img2.jpg" />
+    <Content Include="Images\img3.jpg" />
+    <Content Include="Plugins\assets\favicon.ico" />
+    <Content Include="Plugins\css\styles.css" />
+    <Content Include="Plugins\js\scripts.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\VHNBackend\Views\web.config" />
@@ -2187,11 +2197,12 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Accessories\Details.cshtml" />
+    <Content Include="Views\Accessories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\VHNBackend\Views\asd\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

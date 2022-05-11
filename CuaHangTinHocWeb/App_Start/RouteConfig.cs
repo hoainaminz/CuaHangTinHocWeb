@@ -17,7 +17,8 @@ namespace CuaHangTinHocWeb
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                namespaces: new string[] { "CuaHangTinHocWeb.Controllers" }
+                namespaces: new string[] { "CuaHangTinHocWeb.Controllers" }//Thêm namespace để tránh trùng controller của areas
+                
             );
         }
     }
