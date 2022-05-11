@@ -1,0 +1,61 @@
+﻿@model Data.tblAccessory
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/VHNBackend/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <br />
+    <h2>Xem thông tin chi tiết</h2>
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <!-- 2 Cols Flex Form-->
+    <div class="d-flex flex-row">
+        <div class="form-group col-md-6">
+            <label class="control-label">Tên linh kiện</label>
+            <div>
+                @Html.EditorFor(model => model.Tenlinhkien, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <label class="control-label pt-2">Loại</label>
+            <div>
+                @Html.EditorFor(model => model.Loai, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <label class="control-label pt-2">Giá nhập</label>
+            <div>
+                @Html.EditorFor(model => model.Gianhap, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <label class="control-label pt-2">Giá bán</label>
+            <div>
+                @Html.EditorFor(model => model.Giaban, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="control-label pt-2">
+                <label class="control-label pt-2">Số lượng</label>
+                @Html.EditorFor(model => model.Soluong, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <div>
+                <label class="control-label">Hình ảnh</label>
+                <img src="@Url.Content(Model.Hinhanh)" class="img-fluid rounded mx-auto d-block" alt="@Html.DisplayFor(model => model.Hinhanh)" style="max-height:365px;">
+            </div>
+        </div>
+    </div>
+
+    <!-- 2 Cols Flex Form-->
+    <div class="d-flex flex-row">
+        <div class="form-group col-md-12">
+            
+            
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="d-flex col-md-12 justify-content-center">
+            <a href="@Url.Action("Edit", "Accessories", new { id = Model.IDLinhkien })" class="btn btn-success btn-lg mr-2 " tabindex="-1" role="button" aria-disabled="true">Sửa</a>
+            <a href="@Url.Action("Index","Accessories")" class="btn btn-secondary btn-lg" tabindex="-1" role="button" aria-disabled="true">Danh sách linh kiện</a>
+        </div>
+    </div>
+</div>
+
+    

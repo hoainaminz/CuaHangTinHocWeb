@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CHTHwebmvcModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblAccessories">
+          <Key>
+            <PropertyRef Name="IDLinhkien" />
+          </Key>
+          <Property Name="IDLinhkien" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tenlinhkien" Type="nvarchar" MaxLength="50" />
+          <Property Name="Loai" Type="nvarchar" MaxLength="50" />
+          <Property Name="Gianhap" Type="int" />
+          <Property Name="Giaban" Type="int" />
+          <Property Name="Soluong" Type="int" />
+          <Property Name="Hinhanh" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tblAccount">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="premission" Type="int" />
+        </EntityType>
+        <Function Name="usp_GetAllAccessories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Conditional" Type="nvarchar" Mode="In" />
+          <Parameter Name="Page" Type="int" Mode="In" />
+          <Parameter Name="Pagesize" Type="int" Mode="In" />
+          <Parameter Name="TotalRow" Type="int" Mode="InOut" />
+        </Function>
+        <EntityContainer Name="CHTHwebmvcModelStoreContainer">
+          <EntitySet Name="tblAccessories" EntityType="Self.tblAccessories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAccount" EntityType="Self.tblAccount" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CHTHwebmvcModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblAccount">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="premission" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tblAccessory">
+          <Key>
+            <PropertyRef Name="IDLinhkien" />
+          </Key>
+          <Property Name="IDLinhkien" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tenlinhkien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gianhap" Type="Int32" />
+          <Property Name="Giaban" Type="Int32" />
+          <Property Name="Soluong" Type="Int32" />
+          <Property Name="Hinhanh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="CHTHEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblAccounts" EntityType="Self.tblAccount" />
+          <EntitySet Name="tblAccessories" EntityType="Self.tblAccessory" />
+          <FunctionImport Name="usp_GetAllAccessories" ReturnType="Collection(CHTHwebmvcModel.usp_GetAllAccessories_Result)">
+            <Parameter Name="Conditional" Mode="In" Type="String" />
+            <Parameter Name="Page" Mode="In" Type="Int32" />
+            <Parameter Name="Pagesize" Mode="In" Type="Int32" />
+            <Parameter Name="TotalRow" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="usp_GetAllAccessories_Result">
+          <Property Type="Int32" Name="IDLinhkien" Nullable="false" />
+          <Property Type="String" Name="Tenlinhkien" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Loai" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Gianhap" Nullable="true" />
+          <Property Type="Int32" Name="Giaban" Nullable="true" />
+          <Property Type="Int32" Name="Soluong" Nullable="true" />
+          <Property Type="String" Name="Hinhanh" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="Rowno" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CHTHwebmvcModelStoreContainer" CdmEntityContainer="CHTHEntities">
+          <EntitySetMapping Name="tblAccounts">
+            <EntityTypeMapping TypeName="CHTHwebmvcModel.tblAccount">
+              <MappingFragment StoreEntitySet="tblAccount">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="premission" ColumnName="premission" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAccessories">
+            <EntityTypeMapping TypeName="CHTHwebmvcModel.tblAccessory">
+              <MappingFragment StoreEntitySet="tblAccessories">
+                <ScalarProperty Name="IDLinhkien" ColumnName="IDLinhkien" />
+                <ScalarProperty Name="Tenlinhkien" ColumnName="Tenlinhkien" />
+                <ScalarProperty Name="Loai" ColumnName="Loai" />
+                <ScalarProperty Name="Gianhap" ColumnName="Gianhap" />
+                <ScalarProperty Name="Giaban" ColumnName="Giaban" />
+                <ScalarProperty Name="Soluong" ColumnName="Soluong" />
+                <ScalarProperty Name="Hinhanh" ColumnName="Hinhanh" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetAllAccessories" FunctionName="CHTHwebmvcModel.Store.usp_GetAllAccessories">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CHTHwebmvcModel.usp_GetAllAccessories_Result">
+                <ScalarProperty Name="IDLinhkien" ColumnName="IDLinhkien" />
+                <ScalarProperty Name="Tenlinhkien" ColumnName="Tenlinhkien" />
+                <ScalarProperty Name="Loai" ColumnName="Loai" />
+                <ScalarProperty Name="Gianhap" ColumnName="Gianhap" />
+                <ScalarProperty Name="Giaban" ColumnName="Giaban" />
+                <ScalarProperty Name="Soluong" ColumnName="Soluong" />
+                <ScalarProperty Name="Hinhanh" ColumnName="Hinhanh" />
+                <ScalarProperty Name="Rowno" ColumnName="Rowno" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

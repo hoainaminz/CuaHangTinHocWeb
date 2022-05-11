@@ -1,0 +1,137 @@
+﻿@*@model IEnumerable<Data.tblAccessory>*@
+@model List<Data.usp_GetAllAccessories_Result>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/VHNBackend/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card-header"><h3 class="font-weight-bold">DANH SÁCH LINH KIỆN</div>
+@if (TempData["AlertMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show container mt-2" role="alert">
+        <strong>Chúc mừng ! </strong> @TempData["AlertMessage"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+<div class="card-body">
+
+    <!--Table END -->
+    <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+        @*<div class="row"><div class="col-sm-12 col-md-6"><div class="dt-buttons btn-group flex-wrap">
+            <button class="btn btn-secondary buttons-copy buttons-html5" tabindex="0" aria-controls="example1" type="button">
+            <span>Copy</span></button> <button class="btn btn-secondary buttons-csv buttons-html5" tabindex="0" aria-controls="example1" type="button">
+            <span>CSV</span></button> <button class="btn btn-secondary buttons-excel buttons-html5" tabindex="0" aria-controls="example1" type="button">
+            <span>Excel</span></button> <button class="btn btn-secondary buttons-pdf buttons-html5" tabindex="0" aria-controls="example1" type="button">
+            <span>PDF</span></button> <button class="btn btn-secondary buttons-print" tabindex="0" aria-controls="example1" type="button">
+            <span>Print</span></button> <div class="btn-group"><button class="btn btn-secondary buttons-collection dropdown-toggle buttons-colvis" tabindex="0" aria-controls="example1" type="button" aria-haspopup="true" aria-expanded="false">
+            <span>Column visibility</span></button></div> </div></div><div class="col-sm-12 col-md-6"><div id="example1_filter" class="dataTables_filter">
+                    </div>
+                  </div>
+            </div>*@
+
+        <div class="row">
+            <div class="col-md-12 justify-content-between">
+
+                <div class="d-flex" id="Example_Filter">
+                    <a href="@Url.Action("Create", "Accessories")" class="btn btn-success col-2 mb-2 mr-2"><i class="fas fa-plus mr-1"></i>Tạo mới</a>
+                    <input id="txtfilter" type="search" class="form-control col-md-6 mb-2 mr-2" placeholder="Nhập giá trị cần tìm" value="@ViewBag.condition">
+                </div>
+
+                <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" aria-describedby="example1_info">
+                    <thead class="bg-secondary">
+                        <tr>
+                            <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">Mã linh kiện</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Tên linh kiện</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Loại</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Giá nhập</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Giá bán</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Số lượng</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Vị trí files</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Hành động</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            <tr class="odd">
+                                <td class="dtr-control sorting_1" tabindex="0">@Model[i].IDLinhkien</td>
+                                <td>@Model[i].Tenlinhkien</td>
+                                <td>@Model[i].Loai</td>
+                                <td>@Model[i].Gianhap</td>
+                                <td>@Model[i].Giaban</td>
+                                <td>@Model[i].Soluong</td>
+                                <td>@Model[i].Hinhanh</td>
+                                <td>
+                                    <a href="@Url.Action("Details", "Accessories", new { id = @Model[i].IDLinhkien })">
+                                        <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                                    </a>
+                                    <a href="@Url.Action("Edit", "Accessories", new { id = @Model[i].IDLinhkien })">
+                                        <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                                    </a>
+                                    <a href="@Url.Action("Delete", "Accessories", new { id = @Model[i].IDLinhkien })">
+                                        <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                                    </a>
+
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+        <!--Pagination BEGIN -->
+        <div class="d-flex justify-content-center">
+            <div class="row">
+                <ul id="paginationaccount" class="pagination-md"></ul>
+            </div>
+        </div>
+
+        <!--Pagination END -->
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        window.setTimeout(function () {
+            $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
+                $(this).remove();
+            });
+        }, 5000);
+
+    });
+</script>
+@section scripts{
+    <script src="/Areas/VHNBackend/Scripts/jquery.twbsPagination.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#paginationaccount').twbsPagination({
+                totalPages: @ViewBag.totalpage,
+                visiblePages: 7,
+                initiateStartPageClick: false,
+                startPage: @ViewBag.currentpage,
+                onPageClick: function (event, page) {
+                    var condition = $('#txtfilter').val();
+                    location.href = '/VHNBackend/Accessories/Index?condition='+condition+'&page=' + page;
+                }
+            });
+
+            $('#txtfilter').on('keypress', function (e) {
+                if (e.keyCode == 13 || e.which == 13)
+            {
+                    var condition = $(this).val();
+                    console.log(condition);
+                    location.href = '/VHNBackend/Accessories/Index?condition=' + condition;
+            }
+            })
+
+        })
+    </script>
+}
+
