@@ -1,0 +1,231 @@
+﻿@*@model IEnumerable<Data.tblAccessory>*@
+@model List<Data.usp_GetAllAccessories_Result>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Plugins/CustomStyle.css" rel="stylesheet" />
+<div class="container-fluid bg-light">
+    <div class="row d-flex justify-content-between">
+        <!--Cột trái-->
+        <div class="col-sm-2 bg-light">
+            <!--lContent start here-->
+            <div class="card">
+                <img src="~/Images/09_May1931be2af36d07dbd4da5b9851c89198.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h4 class="text-primary">Bảo hành siêu tốc</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+            <div class="card mt-3">
+                <img src="~/Images/09_May5d4628bebd1127189855753fb05cba34.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h4 class="text-primary">Bảo hành tại nhà</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+            <div class="card mt-3">
+                <img src="~/Images/09_May85be0f7ea11d2f834a7c39d4cb43d8c9.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h4 class="text-primary">Hỗ trợ trả góp 0%</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+            <div class="card mt-3">
+                <img src="~/Images/09_Maycf8f55b33e4c4091ca59f580af8d2c7c.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h4 class="text-primary">PC đồ hoạ cực rẻ</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+            <!--lContent end here-->
+        </div>
+        <!--Cột giữa-->
+        <div class="col-sm-8 bg-white">
+            <!--Content start here-->
+
+            <div class="justify-content-around bg-danger bg-opacity-50 ">
+                <div class="btn-group d-flex flex-wrap " role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-danger">DANH DÁCH SẢN PHẨM</button>
+                    <button type="button" class="btn btn-outline-light"><i class="fa-solid fa-desktop"></i> VGA</button>
+                    <button type="button" class="btn btn-outline-light"><i class="fa-solid fa-microchip"></i> CPU</button>
+                    <button type="button" class="btn btn-outline-light"><i class="fa-solid fa-memory"></i> RAM</button>
+                    <button type="button" class="btn btn-outline-light"><i class="fa-solid fa-plug"></i> PSU</button>
+                    <button type="button" class="btn btn-outline-light"><i class="fa-solid fa-floppy-disk"></i> SSD</button>
+                    <button type="button" class="btn btn-outline-light"><i class="fa-solid fa-ethernet"></i> Dịch vụ khác</button>
+
+                </div>
+            </div>
+
+            <div class="wrapper">
+                <!-- Page Content -->
+                <div id="content-wrapper">
+                    <!-- We'll fill this with dummy content -->
+                    <!-- Page Content-->
+                    <div class="container px-1 px-lg-2">
+                        <!-- Heading Row-->
+
+                        <div class="row gx-4 gx-lg-5 align-items-center my-5">
+                            <div class="col-lg-7">
+                                <!--carousel-->
+
+                                <div id="demo" class="carousel slide" data-interval="3000">
+
+                                    <!-- Indicators/dots -->
+                                    <div class="carousel-indicators">
+                                        <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+                                        <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+                                        <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+                                    </div>
+
+                                    <!-- The slideshow/carousel -->
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <img src="~/Images/acce1.jpg" alt="" class="d-block w-100">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="~/Images/acce2.jpg" alt="" class="d-block w-100">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="~/Images/acce3.jpg" alt="" class="d-block w-100">
+                                        </div>
+                                    </div>
+
+                                    <!-- Left and right controls/icons -->
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon"></span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon"></span>
+                                    </button>
+                                </div>
+                                <!--end carousel-->
+                            </div>
+                            <div class="col-lg-5">
+                                <h2 class="font-weight-light">HỆ THỐNG BÁN LẺ UY TÍN CHTH</h2>
+                                <HR />
+                                <p>Nếu Quý Khách gặp khó khăn trong việc liên hệ Trung Tâm Bảo Hành, Quý Khách vui lòng liên hệ với bộ phận chăm sóc khách hàng của CHTH theo thông tin sau để được hỗ trợ:</p>
+                                <a class="btn btn-outline-primary" href="#!"><i class="fa-solid fa-phone"></i> LIÊN HỆ CSKH</a>
+                            </div>
+                        </div>
+                        <!-- Call to Action-->
+                        <hr />
+                        @*<div class="card text-white bg-success bg-opacity-50 my-5 py-4 text-center">
+                                <div class="card-body"><p class="text-black m-0">Linh kiện máy tính</p></div>
+                            </div>*@
+                        <!-- Content Row-->
+                        <div class="d-flex wrapper">
+                            <input id="txtfilter" type="search" class="form-control bg-dark text-light col-md-6 mb-2 mr-2" placeholder="Nhập giá trị cần tìm" value="@ViewBag.condition">
+                        </div>
+                        <div class="row gx-4 gx-lg-5">
+                            <!-- Items-->
+                            @foreach (var item in Model)
+                            {
+                                <div class="col-md-4 mb-5">
+                                    <div class="card card2 h-200 border-5">
+                                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Bán chạy</div>
+                                        <div class="card-body">
+                                            <div class=" d-flex justify-content-center">
+                                                <img class="img-fluid p-2" src="@Url.Content(item.Hinhanh)" alt="" style="max-height: 150px; background-position: center center; background-repeat: no-repeat; ">
+                                            </div>
+                                            <h4 class="card-title d-flex justify-content-center">
+                                                @Html.DisplayFor(modelItem => item.Tenlinhkien)
+                                        </h4>
+                                        <hr />
+                                        <h5 class="card-text text-danger d-flex justify-content-center">@Html.DisplayFor(modelItem => item.Giaban)<strong> VNĐ</strong></h5>
+                                    </div>
+                                    <div class="card-footer d-flex justify-content-center bg-secondary bg-opacity-25"><a href="@Url.Action("Details","Accessories", new {id = item.IDLinhkien })" class="btn btn-outline-dark mt-auto px-5">   Chi tiết   </a></div>
+                                </div>
+                            </div>
+                        }
+
+                            <!-- End-Items-->
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <!--Pagination BEGIN -->
+            <div class="d-flex justify-content-center">
+                <div class="row">
+                    <ul id="paginationaccount" class="pagination-md"></ul>
+                </div>
+            </div>
+
+            <!--Pagination END -->
+            <!-- End Content-->
+        </div>
+        <!--Cột phải-->
+        <div class="col-sm-2 bg-light">
+            <!--lContent start here-->
+            <div class="card">
+                <img src="~/Images/acce2.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h4 class="text-primary">Sale 50% Khách hàng mới</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+            <div class="card mt-3">
+                <img src="~/Images/acce1.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h4 class="text-primary">Mẫu mã đa dạng</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+            <div class="card mt-3">
+                <img src="~/Images/11_May4f8bff05f9751229e151c9cdbee4ee3d.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h4 class="text-primary">Lap top gaming giá rẻ</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+            <div class="card mt-3">
+                <img src="~/Images/13_May4a47a0db6e60853dedfcfdf08a5ca249.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h4 class="text-primary">Gian hàng thanh lý</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+            <!--lContent end here-->
+        </div>
+    </div>
+</div>
+<!-- Carousel -->
+<script language="JavaScript" type="text/javascript">
+    $(document).ready(function () {
+        $('.carousel').carousel({
+            interval: 3000
+        })
+    });
+</script>
+@section scripts{
+    <script src="~/Areas/VHNBackend/Scripts/jquery.twbsPagination.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#paginationaccount').twbsPagination({
+                totalPages: @ViewBag.totalpage,
+                visiblePages: 7,
+                initiateStartPageClick: false,
+                startPage: @ViewBag.currentpage,
+                onPageClick: function (event, page) {
+                    var condition = $('#txtfilter').val();
+                    location.href = '/Accessories/Index?condition='+condition+'&page=' + page;
+                }
+            });
+
+            $('#txtfilter').on('keypress', function (e) {
+                if (e.keyCode == 13 || e.which == 13)
+            {
+                    var condition = $(this).val();
+                    console.log(condition);
+                    location.href = '/Accessories/Index?condition=' + condition;
+            }
+            })
+
+        })
+    </script>
+}

@@ -1,0 +1,83 @@
+﻿@model Data.tblAccessory
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .zoom {
+        transition: transform .2s; /* Animation */
+
+    }
+
+        .zoom:hover {
+            transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+        }
+</style>
+<link id="pagestyle" href="./assets/css/material-kit.css?v=3.0.2" rel="stylesheet" />
+<div class="container d-flex flex-column min-vh-100">
+    <br />
+    <h2>Xem thông tin chi tiết</h2>
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <!-- 2 Cols Flex Form-->
+    <div class="d-flex flex-row ">
+        <div class="form-group col-md-6">
+            <label class="control-label">Tên linh kiện</label>
+            <div>
+                @Html.EditorFor(model => model.Tenlinhkien, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <label class="control-label pt-2">Loại</label>
+            <div>
+                @Html.EditorFor(model => model.Loai, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <label class="control-label pt-2">Giá nhập</label>
+            <div>
+                @Html.EditorFor(model => model.Gianhap, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <label class="control-label pt-2">Giá bán</label>
+            <div>
+                @Html.EditorFor(model => model.Giaban, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="control-label pt-2">
+                <label class="control-label pt-2">Số lượng</label>
+                @Html.EditorFor(model => model.Soluong, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+            <div class="form-group col-md-6">
+                <div>
+                    <img src="@Url.Content(Model.Hinhanh)" class="zoom img-fluid rounded mx-auto d-block" alt="Hoainaminz" style="max-height:365px;">
+                </div>
+            </div>
+        
+    </div>
+
+    <!-- 2 Cols Flex Form-->
+    <div class="d-flex flex-row">
+        <div class="form-group col-md-12">
+
+
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="d-flex col-md-12 justify-content-center pb-2">
+            <a href="@Url.Action("Edit", "Accessories", new { id = Model.IDLinhkien })" class="btn btn-success btn-lg me-2 " tabindex="-1" role="button" aria-disabled="true">THÊM VÀO GIỎ HÀNG</a>
+            <a href="@Url.Action("Index","Accessories")" class="btn btn-secondary btn-lg" tabindex="-1" role="button" aria-disabled="true">Danh sách linh kiện</a>
+        </div>
+    </div>
+</div>
+
+<header class="header-2">
+    <div class="page-header min-vh-75 relative" style="background-image: url('./Images/gaming-gear.jpg')">
+        <span class="mask bg-gradient-info opacity-4"></span>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 text-center mx-auto">
+                    <h1 class="text-white pt-3 mt-n5">CỬA HÀNG TIN HỌC</h1>
+                    <p class="lead text-white mt-3">Hệ thống bản lẻ thiết bị tin học<br />Lớn nhất toàn quốc.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

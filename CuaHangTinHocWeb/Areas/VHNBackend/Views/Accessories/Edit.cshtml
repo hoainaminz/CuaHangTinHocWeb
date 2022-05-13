@@ -5,74 +5,77 @@
     Layout = "~/Areas/VHNBackend/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>tblAccessory</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.IDLinhkien)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Tenlinhkien, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Tenlinhkien, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Tenlinhkien, "", new { @class = "text-danger" })
+    <div class="container">
+        <br />
+        <h2>SỬA THÔNG TIN TÀI KHOẢN</h2>
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.IDLinhkien)
+            <!-- 2 Cols Flex Form-->
+            <div class="d-flex flex-row">
+                <div class="form-group col-md-6">
+                    <label class="control-label">Tên linh kiện</label>
+                    <div>
+                        @Html.EditorFor(model => model.Tenlinhkien, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Tenlinhkien, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="control-label">Loại</label>
+                    <div>
+                        @Html.EditorFor(model => model.Loai, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Loai, "", new { @class = "text-danger" })
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Loai, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Loai, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Loai, "", new { @class = "text-danger" })
+            <!-- 2 Cols Flex Form-->
+            <div class="d-flex flex-row">
+                <div class="form-group col-md-6">
+                    <label class="control-label">Giá nhập</label>
+                    <div>
+                        @Html.EditorFor(model => model.Gianhap, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Gianhap, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="control-label">Giá bán</label>
+                    <div>
+                        @Html.EditorFor(model => model.Giaban, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Giaban, "", new { @class = "text-danger" })
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Gianhap, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Gianhap, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Gianhap, "", new { @class = "text-danger" })
+            <div class="form-group">
+
+                <div class="col-md-12">
+                    <label class="control-label">Số lượng</label>
+                    @Html.EditorFor(model => model.Soluong, new { htmlAttributes = new { @class = "form-control"} })
+                    @Html.ValidationMessageFor(model => model.Soluong, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Giaban, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Giaban, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Giaban, "", new { @class = "text-danger" })
+            <!-- 2 Cols Flex Form-->
+            <div class="d-flex flex-row disabled">
+                <div class="form-group col-md-12">
+                    <label class="control-label">Vị trí file</label>
+                    <div>
+                        @Html.EditorFor(model => model.Hinhanh, new { htmlAttributes = new { @class = "form-control", @maxlength = "10" } })
+                        @Html.ValidationMessageFor(model => model.Hinhanh, "", new { @class = "text-danger" })
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Soluong, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Soluong, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Soluong, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Hinhanh, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Hinhanh, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Hinhanh, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <div class="form-group">
+                <div class="d-flex col-md-12 justify-content-center">
+                    <input type="submit" value="     Lưu     " class="btn btn-success btn-lg mx-2" />
+                    <a href="@Url.Action("Index","Accessories")" class="btn btn-secondary btn-lg" tabindex="-1" role="button" aria-disabled="true">Danh sách tài khoản</a>
+                </div>
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

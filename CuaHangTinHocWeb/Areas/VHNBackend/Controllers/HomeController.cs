@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace CuaHangTinHocWeb.Areas.VHNBackend.Controllers
 {
-    [RouteArea("VHNBackend")]
+    [RouteArea("VHNBackend")] //Custom router chỉ hoạt động trong VHNBackend
     public class HomeController : Controller
     {
         // GET: VHNBackend/Home

@@ -64,7 +64,7 @@
                                 <td>@Model[i].Gianhap</td>
                                 <td>@Model[i].Giaban</td>
                                 <td>@Model[i].Soluong</td>
-                                <td>@Model[i].Hinhanh</td>
+                                <td style=" max-width: 200px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis; ">@Model[i].Hinhanh</td>
                                 <td>
                                     <a href="@Url.Action("Details", "Accessories", new { id = @Model[i].IDLinhkien })">
                                         <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
