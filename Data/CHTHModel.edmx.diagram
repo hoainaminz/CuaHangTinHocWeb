@@ -7,6 +7,7 @@
       <Diagram DiagramId="995817da475548d1b8da546953518acb" Name="Diagram1">
         <EntityTypeShape EntityType="CHTHwebmvcModel.tblAccount" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CHTHwebmvcModel.tblAccessory" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CHTHwebmvcModel.tblEmployee" Width="1.5" PointX="0.75" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

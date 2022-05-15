@@ -1,0 +1,131 @@
+﻿@model List<Data.usp_GetAllEmployee_Result>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/VHNbackend/Views/Shared/_Layout.cshtml";
+}
+<div class="card-header"><h3 class="font-weight-bold">DANH SÁCH LINH KIỆN</div>
+@if (TempData["AlertMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show container mt-2" role="alert">
+        <strong>Chúc mừng ! </strong> @TempData["AlertMessage"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+<div class="card-body">
+
+    <!--Table END -->
+    <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+        @*<div class="row"><div class="col-sm-12 col-md-6"><div class="dt-buttons btn-group flex-wrap">
+            <button class="btn btn-secondary buttons-copy buttons-html5" tabindex="0" aria-controls="example1" type="button">
+            <span>Copy</span></button> <button class="btn btn-secondary buttons-csv buttons-html5" tabindex="0" aria-controls="example1" type="button">
+            <span>CSV</span></button> <button class="btn btn-secondary buttons-excel buttons-html5" tabindex="0" aria-controls="example1" type="button">
+            <span>Excel</span></button> <button class="btn btn-secondary buttons-pdf buttons-html5" tabindex="0" aria-controls="example1" type="button">
+            <span>PDF</span></button> <button class="btn btn-secondary buttons-print" tabindex="0" aria-controls="example1" type="button">
+            <span>Print</span></button> <div class="btn-group"><button class="btn btn-secondary buttons-collection dropdown-toggle buttons-colvis" tabindex="0" aria-controls="example1" type="button" aria-haspopup="true" aria-expanded="false">
+            <span>Column visibility</span></button></div> </div></div><div class="col-sm-12 col-md-6"><div id="example1_filter" class="dataTables_filter">
+                    </div>
+                  </div>
+            </div>*@
+
+        <div class="row">
+            <div class="col-md-12 justify-content-between">
+
+                <div class="d-flex" id="Example_Filter">
+                    <a href="@Url.Action("Create", "Employee")" class="btn btn-success col-2 mb-2 mr-2"><i class="fas fa-plus mr-1"></i>Tạo mới</a>
+                    <input id="txtfilter" type="search" class="form-control col-md-6 mb-2 mr-2" placeholder="Nhập giá trị cần tìm" value="@ViewBag.condition">
+                </div>
+
+                <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" aria-describedby="example1_info">
+                    <thead class="bg-secondary">
+                        <tr>
+                            <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">Mã khách hàng</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Tên khách hàng</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Địa chỉ</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Số điện thoại</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Ảnh đại diện</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Hành động</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            <tr class="odd">
+                                <td class="dtr-control sorting_1" tabindex="0">@Model[i].IDKH</td>
+                                <td>@Model[i].TenKH</td>
+                                <td>@Model[i].Diachi</td>
+                                <td>@Model[i].SDT</td>
+                                <td style=" max-width: 200px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis; ">@Model[i].Hinhanh</td>
+                                <td>
+                                    <a href="@Url.Action("Details", "Employee", new { id = @Model[i].IDKH })">
+                                        <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                                    </a>
+                                    <a href="@Url.Action("Edit", "Employee", new { id = @Model[i].IDKH })">
+                                        <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                                    </a>
+                                    <a href="@Url.Action("Delete", "Employee", new { id = @Model[i].IDKH })">
+                                        <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                                    </a>
+
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+        <!--Pagination BEGIN -->
+        <div class="d-flex justify-content-center">
+            <div class="row">
+                <ul id="paginationaccount" class="pagination-md"></ul>
+            </div>
+        </div>
+
+        <!--Pagination END -->
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        window.setTimeout(function () {
+            $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
+                $(this).remove();
+            });
+        }, 5000);
+
+    });
+</script>
+@section scripts{
+    <script src="/Areas/VHNBackend/Scripts/jquery.twbsPagination.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#paginationaccount').twbsPagination({
+                totalPages: @ViewBag.totalpage,
+                visiblePages: 7,
+                initiateStartPageClick: false,
+                startPage: @ViewBag.currentpage,
+                onPageClick: function (event, page) {
+                    var condition = $('#txtfilter').val();
+                    location.href = '/VHNBackend/Employee/Index?condition='+condition+'&page=' + page;
+                }
+            });
+
+            $('#txtfilter').on('keypress', function (e) {
+                if (e.keyCode == 13 || e.which == 13)
+            {
+                    var condition = $(this).val();
+                    console.log(condition);
+                    location.href = '/VHNBackend/Employee/Index?condition=' + condition;
+            }
+            })
+
+        })
+    </script>
+}

@@ -29,6 +29,7 @@ namespace Data
     
         public virtual DbSet<tblAccount> tblAccounts { get; set; }
         public virtual DbSet<tblAccessory> tblAccessories { get; set; }
+        public virtual DbSet<tblEmployee> tblEmployees { get; set; }
     
         public virtual ObjectResult<usp_GetAllAccessories_Result> usp_GetAllAccessories(string conditional, Nullable<int> page, Nullable<int> pagesize, ObjectParameter totalRow)
         {
@@ -45,6 +46,23 @@ namespace Data
                 new ObjectParameter("Pagesize", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetAllAccessories_Result>("usp_GetAllAccessories", conditionalParameter, pageParameter, pagesizeParameter, totalRow);
+        }
+    
+        public virtual ObjectResult<usp_GetAllEmployee_Result> usp_GetAllEmployee(string conditional, Nullable<int> page, Nullable<int> pagesize, ObjectParameter totalRow)
+        {
+            var conditionalParameter = conditional != null ?
+                new ObjectParameter("Conditional", conditional) :
+                new ObjectParameter("Conditional", typeof(string));
+    
+            var pageParameter = page.HasValue ?
+                new ObjectParameter("Page", page) :
+                new ObjectParameter("Page", typeof(int));
+    
+            var pagesizeParameter = pagesize.HasValue ?
+                new ObjectParameter("Pagesize", pagesize) :
+                new ObjectParameter("Pagesize", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetAllEmployee_Result>("usp_GetAllEmployee", conditionalParameter, pageParameter, pagesizeParameter, totalRow);
         }
     }
 }

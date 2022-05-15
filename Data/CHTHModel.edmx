@@ -25,7 +25,25 @@
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
           <Property Name="premission" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CHTHwebmvc.dbo.tblEmployee' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tblEmployee">
+          <Key>
+            <PropertyRef Name="IDKH" />
+          </Key>
+          <Property Name="IDKH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenKH" Type="nvarchar" MaxLength="150" />
+          <Property Name="Diachi" Type="nvarchar" MaxLength="150" />
+          <Property Name="SDT" Type="nvarchar" MaxLength="20" />
+          <Property Name="Hinhanh" Type="nvarchar(max)" />
+        </EntityType>
         <Function Name="usp_GetAllAccessories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Conditional" Type="nvarchar" Mode="In" />
+          <Parameter Name="Page" Type="int" Mode="In" />
+          <Parameter Name="Pagesize" Type="int" Mode="In" />
+          <Parameter Name="TotalRow" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="usp_GetAllEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Conditional" Type="nvarchar" Mode="In" />
           <Parameter Name="Page" Type="int" Mode="In" />
           <Parameter Name="Pagesize" Type="int" Mode="In" />
@@ -34,6 +52,15 @@
         <EntityContainer Name="CHTHwebmvcModelStoreContainer">
           <EntitySet Name="tblAccessories" EntityType="Self.tblAccessories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblAccount" EntityType="Self.tblAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEmployee" EntityType="Self.tblEmployee" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblEmployee].[IDKH] AS [IDKH], 
+    [tblEmployee].[TenKH] AS [TenKH], 
+    [tblEmployee].[Diachi] AS [Diachi], 
+    [tblEmployee].[SDT] AS [SDT], 
+    [tblEmployee].[Hinhanh] AS [Hinhanh]
+    FROM [dbo].[tblEmployee] AS [tblEmployee]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -68,6 +95,13 @@
             <Parameter Name="Pagesize" Mode="In" Type="Int32" />
             <Parameter Name="TotalRow" Mode="InOut" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="tblEmployees" EntityType="CHTHwebmvcModel.tblEmployee" />
+          <FunctionImport Name="usp_GetAllEmployee" ReturnType="Collection(CHTHwebmvcModel.usp_GetAllEmployee_Result)">
+            <Parameter Name="Conditional" Mode="In" Type="String" />
+            <Parameter Name="Page" Mode="In" Type="Int32" />
+            <Parameter Name="Pagesize" Mode="In" Type="Int32" />
+            <Parameter Name="TotalRow" Mode="InOut" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_GetAllAccessories_Result">
           <Property Type="Int32" Name="IDLinhkien" Nullable="false" />
@@ -77,6 +111,24 @@
           <Property Type="Int32" Name="Giaban" Nullable="true" />
           <Property Type="Int32" Name="Soluong" Nullable="true" />
           <Property Type="String" Name="Hinhanh" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="Rowno" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="tblEmployee">
+          <Key>
+            <PropertyRef Name="IDKH" />
+          </Key>
+          <Property Name="IDKH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenKH" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Diachi" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Hinhanh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="usp_GetAllEmployee_Result">
+          <Property Type="Int32" Name="IDKH" Nullable="false" />
+          <Property Type="String" Name="TenKH" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Diachi" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="SDT" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Hinhanh" Nullable="true" />
           <Property Type="Int64" Name="Rowno" Nullable="true" />
         </ComplexType>
       </Schema>
@@ -116,6 +168,29 @@
                 <ScalarProperty Name="Gianhap" ColumnName="Gianhap" />
                 <ScalarProperty Name="Giaban" ColumnName="Giaban" />
                 <ScalarProperty Name="Soluong" ColumnName="Soluong" />
+                <ScalarProperty Name="Hinhanh" ColumnName="Hinhanh" />
+                <ScalarProperty Name="Rowno" ColumnName="Rowno" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tblEmployees">
+            <EntityTypeMapping TypeName="CHTHwebmvcModel.tblEmployee">
+              <MappingFragment StoreEntitySet="tblEmployee">
+                <ScalarProperty Name="Hinhanh" ColumnName="Hinhanh" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="Diachi" ColumnName="Diachi" />
+                <ScalarProperty Name="TenKH" ColumnName="TenKH" />
+                <ScalarProperty Name="IDKH" ColumnName="IDKH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetAllEmployee" FunctionName="CHTHwebmvcModel.Store.usp_GetAllEmployee">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CHTHwebmvcModel.usp_GetAllEmployee_Result">
+                <ScalarProperty Name="IDKH" ColumnName="IDKH" />
+                <ScalarProperty Name="TenKH" ColumnName="TenKH" />
+                <ScalarProperty Name="Diachi" ColumnName="Diachi" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
                 <ScalarProperty Name="Hinhanh" ColumnName="Hinhanh" />
                 <ScalarProperty Name="Rowno" ColumnName="Rowno" />
               </ComplexTypeMapping>
